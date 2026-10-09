@@ -80,12 +80,18 @@
 ## 🚀 Как запустить
 
 ### Что нужно установить
-1. **Docker Desktop** — [скачать](https://www.docker.com/products/docker-desktop/)
-2. **Node.js 20+** — [скачать](https://nodejs.org/)
 
-### Запуск
+**1. Docker Desktop** — [скачать](https://www.docker.com/products/docker-desktop/)
+Нужен для запуска серверной части и базы данных.
 
-**1. Открой терминал в папке проекта** и запусти:
+**2. Node.js 20+** — [скачать](https://nodejs.org/)
+Нужен для запуска сайта (фронтенда).
+
+После установки **перезагрузи компьютер** и проверь, что всё работает:
 
 ```bash
+docker --version
+node --version
+npm --version
 docker-compose up --build -d
+npm start
