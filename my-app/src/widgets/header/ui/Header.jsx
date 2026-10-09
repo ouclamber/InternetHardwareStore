@@ -28,8 +28,8 @@ const Header = ({ navigate, onSearch }) => {
             <nav className="nav container">
                 <a href="/" className="nav__logo" onClick={handleLogoClick}>
                     <div className="logo-text">
-                        <span className="logo-primary">GLANCE</span>
-                        <span className="logo-secondary">vex</span>
+                        <span className="logo-primary">HardWare</span>
+                        <span className="logo-secondary">Store</span>
                     </div>
                 </a>
 
