@@ -39,7 +39,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          CI: false
+          CI: true
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
