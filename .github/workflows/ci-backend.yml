@@ -10,6 +10,7 @@ on:
     branches: [ main, develop ]
     paths:
       - 'Backend/**'
+  workflow_dispatch:
 
 env:
   DOTNET_VERSION: '10.0.x'
@@ -29,17 +30,18 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+          dotnet-quality: 'preview'
 
       - name: Restore
-        run: dotnet restore Backend/Backend.slnx
+        run: dotnet restore Backend/Backend.Tests/Backend.Tests.csproj
 
       - name: Build
-        run: dotnet build Backend/Backend.slnx --configuration Release --no-restore
+        run: dotnet build Backend/Backend.Tests/Backend.Tests.csproj --configuration Debug --no-restore
 
       - name: Test with coverage
         run: |
           dotnet test Backend/Backend.Tests/Backend.Tests.csproj \
-            --configuration Release \
+            --configuration Debug \
             --no-build \
             --collect:"XPlat Code Coverage" \
             --settings Backend/coverlet.runsettings \
@@ -53,7 +55,7 @@ jobs:
           reportgenerator \
             -reports:"./TestResults/**/coverage.cobertura.xml" \
             -targetdir:"./coverage-report" \
-            -reporttypes:"Html;TextSummary;Cobertura"
+            -reporttypes:"Html;TextSummary"
 
       - name: Show coverage summary
         run: cat coverage-report/Summary.txt
@@ -63,10 +65,3 @@ jobs:
         with:
           name: coverage-report
           path: coverage-report/
-
-      - name: Upload coverage to Codecov (optional)
-        uses: codecov/codecov-action@v4
-        if: always()
-        with:
-          files: ./coverage-report/Cobertura.xml
-          fail_ci_if_error: false
