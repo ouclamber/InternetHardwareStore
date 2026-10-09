@@ -4,12 +4,14 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
+using Microsoft.EntityFrameworkCore;
 
 // Domain
 using Backend.Domain.Shared;
 
 // Infrastructure (DI + DbContext + Repos + Services + MediatR)
 using Backend.Infrastructure;
+using Backend.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -143,13 +145,31 @@ builder.Services.Configure<GzipCompressionProviderOptions>(options =>
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+    try
+    {
+        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        logger.LogInformation("Применение миграций...");
+        db.Database.Migrate();
+
+        logger.LogInformation("Заполнение БД тестовыми данными...");
+        DbInitializer.Seed(db);
+
+        logger.LogInformation("Миграции и seed завершены.");
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "Ошибка при миграции/seed БД");
+        throw;
+    }
+}
+
 app.UseMiddleware<Backend.Middleware.DomainExceptionMiddleware>();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
