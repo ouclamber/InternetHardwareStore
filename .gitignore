@@ -1,16 +1,16 @@
-# Node modules
+# ─── Node modules ─────────────────────────────────
 node_modules/
 package-lock.json
 yarn.lock
 
-# Build outputs
+# ─── Build outputs ────────────────────────────────
 dist/
 build/
 *.user
 *.suo
 *.sln.docstates
 
-# .NET
+# ─── .NET ─────────────────────────────────────────
 bin/
 obj/
 *.log
@@ -18,52 +18,68 @@ logs/
 *.cache
 *.tmp
 *.userprefs
+*.csproj.user
+*.csproj.lscache
 
-# Visual Studio / VS Code
+# ─── Coverage ─────────────────────────────────────
+coverage-report/
+coveragereport/
+TestResults/
+*.cobertura.xml
+coverage.json
+coverage*.json
+
+# ─── Visual Studio / VS Code / Rider ──────────────
 .vs/
 .vscode/
 *.swp
 *.swo
+.idea/
+*.iml
+*.sln.iml
+*.DotSettings.user
 
-# Environment files
+# ─── Environment files ────────────────────────────
 .env
 .env.local
 .env.development
 .env.production
 
-# IDE
-.idea/
-*.iml
-
-# OS
+# ─── OS ───────────────────────────────────────────
 Thumbs.db
 .DS_Store
 Desktop.ini
 
-# Backup files
+# ─── Backup files ─────────────────────────────────
 *.bak
 *.backup
 
-# Logs
-logs/
-*.log
-
-# Database
+# ─── Database ─────────────────────────────────────
 *.db
 *.sqlite
 *.mdb
 *.ldf
 
-# Backend logs
+# ─── Backend logs ─────────────────────────────────
 Backend/logs/
+**/logs/
 
-# Frontend build
+# ─── Frontend build ───────────────────────────────
 client/build/
 client/dist/
-
-# React
 client/node_modules/
 client/.env
 client/.env.local
 client/.env.development
 client/.env.production
+
+# ─── OneDrive artifacts ───────────────────────────
+*.OneDrive_*
+~$*
+*OneDrive*.tmp
+
+# ─── Stray files ──────────────────────────────────
+findstr
+Backend/findstr
+
+my-app/coverage/
