@@ -8,11 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.3.0" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="10.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="9.0.10" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -32,8 +29,39 @@
     <PackageReference Include="Serilog.Extensions.Logging" Version="10.0.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.17.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="Backend.Domain\Backend.Domain.csproj" />
+    <ProjectReference Include="Backend.Application\Backend.Application.csproj" />
+    <ProjectReference Include="Backend.Infrastructure\Backend.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Backend.Domain\**" />
+    <Compile Remove="Backend.Application\**" />
+    <Compile Remove="Backend.Infrastructure\**" />
+    <Compile Remove="Backend.Tests\**" />          
+    <Compile Remove="OldControllers\**" />
+    <Compile Remove="Controllers_old\**" />
+    <Compile Remove="_old_controllers\**" />
+
+    <Content Remove="Backend.Domain\**" />
+    <Content Remove="Backend.Application\**" />
+    <Content Remove="Backend.Infrastructure\**" />
+    <Content Remove="Backend.Tests\**" />         
+
+    <EmbeddedResource Remove="Backend.Domain\**" />
+    <EmbeddedResource Remove="Backend.Application\**" />
+    <EmbeddedResource Remove="Backend.Infrastructure\**" />
+    <EmbeddedResource Remove="Backend.Tests\**" />  
+
+    <None Remove="Backend.Domain\**" />
+    <None Remove="Backend.Application\**" />
+    <None Remove="Backend.Infrastructure\**" />
+    <None Remove="Backend.Tests\**" />              
   </ItemGroup>
 
 </Project>
