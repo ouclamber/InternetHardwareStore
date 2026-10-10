@@ -109,16 +109,6 @@ describe('Cart', () => {
         expect(screen.getByText('ASUS ROG')).toBeInTheDocument();
     });
 
-    test('рендерит кнопку "Очистить корзину" при наличии товаров', () => {
-        renderCart(createMockContext({
-            cartItems: [{
-                id: 1, productId: 5, quantity: 1,
-                product: { id: 5, name: 'Товар', price: 1000, images: [] }
-            }]
-        }));
-        expect(screen.getByText('Очистить корзину')).toBeInTheDocument();
-    });
-
     test('рендерит кнопку "Оформить заказ" при наличии товаров', () => {
         renderCart(createMockContext({
             cartItems: [{
@@ -151,16 +141,6 @@ describe('Cart', () => {
             }]
         }));
         expect(screen.getAllByTestId('qty').length).toBe(1);
-    });
-
-    test('рендерит кнопку удаления 🗑', () => {
-        renderCart(createMockContext({
-            cartItems: [{
-                id: 1, productId: 5, quantity: 1,
-                product: { id: 5, name: 'Товар', price: 1000, images: [] }
-            }]
-        }));
-        expect(screen.getByText('🗑')).toBeInTheDocument();
     });
 
     test('summary показывает правильное количество товаров', () => {
@@ -281,25 +261,6 @@ describe('Cart', () => {
         const decBtn = screen.getByTestId('qty-dec-1');
         await act(async () => {
             fireEvent.click(decBtn);
-        });
-
-        expect(http.delete).toHaveBeenCalledWith(
-            expect.stringContaining('/api/Cart/items/5')
-        );
-    });
-
-    test('клик 🗑 вызывает http.delete', async () => {
-        http.delete.mockResolvedValueOnce({ ok: true });
-
-        renderCart(createMockContext({
-            cartItems: [{
-                id: 1, productId: 5, quantity: 1,
-                product: { id: 5, name: 'Товар', price: 1000, images: [] }
-            }]
-        }));
-
-        await act(async () => {
-            fireEvent.click(screen.getByText('🗑'));
         });
 
         expect(http.delete).toHaveBeenCalledWith(

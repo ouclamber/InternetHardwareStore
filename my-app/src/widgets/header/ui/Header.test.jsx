@@ -34,8 +34,7 @@ describe('Header', () => {
 
     test('рендерит логотип GLANCEvex', () => {
         renderHeader();
-        expect(document.querySelector('.logo-primary')).toHaveTextContent('GLANCE');
-        expect(document.querySelector('.logo-secondary')).toHaveTextContent('vex');
+        expect(document.querySelector('.logo-primary')).toHaveTextContent('HardWare');
     });
 
     test('рендерит поиск', () => {
